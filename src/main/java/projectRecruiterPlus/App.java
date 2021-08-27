@@ -25,7 +25,7 @@ public class App extends Application {
 		resources = new Resources();
 		LogInScene.scene(primaryStage);
 		addinfo();
-		
+
 		primaryStage.setOnCloseRequest(e -> {
 			e.consume();
 			if (AlertBoxExit.display()) {
@@ -42,10 +42,10 @@ public class App extends Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		CompanyRole companyrole = new Manager(user);
 		resources.getSession().save(companyrole);
-		
+
 		User user2 = new User("2", "2");
 		try {
 			resources.getDaoUser().save(user2);
@@ -53,21 +53,21 @@ public class App extends Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		CompanyRole companyrole2 = new Recruiter(user2);
 		resources.getSession().save(companyrole2);
-		
-		User user3 = new User("3", "3");
+
+		User user3 = new User("4", "4");
 		try {
 			resources.getDaoUser().save(user3);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		CompanyRole companyrole3 = new AppAdmin(user3);
 		resources.getSession().save(companyrole3);
-		
+
 	}
 
 }
