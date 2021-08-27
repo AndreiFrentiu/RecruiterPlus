@@ -57,7 +57,7 @@ public class App extends Application {
 		CompanyRole companyrole2 = new Recruiter(user2);
 		resources.getSession().save(companyrole2);
 
-		User user3 = new User("4", "4");
+		User user3 = new User("5", "5");
 		try {
 			resources.getDaoUser().save(user3);
 		} catch (Exception e) {
