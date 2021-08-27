@@ -1,0 +1,39 @@
+.root {
+	-fx-font-family: 'JetBrains Mono';
+	-fx-font-size: 14px;
+	-fx-font-weight: bold;
+	-fx-background-color: lightblue;
+	-fx-background-image: url("/projectRecruiterPlus/graphicsInterface/CSS/imgs/purple_exit.jpg");
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: stretch;
+}
+
+.label {
+	-fx-text-fill: white;
+	-fx-font-size: 15px;
+}
+
+.button {
+	-fx-pref-width: 100px;
+	-fx-background-color: red;
+	-fx-text-fill: white;
+	-fx-background-radius: 25px;
+}
+
+.button:hover {
+	-fx-background-color: white;
+	-fx-text-fill: red;
+}
+
+.button:pressed {
+	-fx-background-color: #E8DCDC;
+	-fx-text-fill: #B62020;
+}
+
+.text-field {
+	-fx-border-color: blue;
+	-fx-border-width: 3px;
+	-fx-border-radius: 25px;
+	-fx-background-radius: 25px;
+	-fx-pref-column-count: 25;
+}
