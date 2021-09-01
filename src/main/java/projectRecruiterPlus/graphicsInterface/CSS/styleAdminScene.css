@@ -1,48 +1,90 @@
 .root {
-	-fx-font-family: 'JetBrains Mono';
-	-fx-font-size: 14px;
-	-fx-font-weight: bold;
-	-fx-background-color: lightblue;
-	-fx-background-image: url("/projectRecruiterPlus/graphicsInterface/CSS/imgs/adminbk.jpg");
-	-fx-background-repeat: no-repeat;
-	-fx-background-size: stretch;
+  -fx-font-family: "JetBrains Mono";
+  -fx-font-size: 14px;
+  -fx-font-weight: bold;
+  -fx-background-color: lightblue;
+  -fx-background-image: url("/projectRecruiterPlus/graphicsInterface/CSS/imgs/adminbk.jpg");
+  -fx-background-repeat: no-repeat;
+  -fx-background-size: stretch;
 }
 
 .label {
-	-fx-text-fill: white;
+  -fx-text-fill: white;
+  -fx-font-size: 22px;
 }
 
 .button {
-	-fx-pref-width: 100px;
+  -fx-pref-width: 100px;
+}
+
+.choice-box {
+  -fx-background-color: red;
+  -fx-mark-color: white;
+  -fx-background-radius: 25px;
+  -fx-pref-width: 150px;
+  -fx-background-radius: 25px;
+}
+
+.choice-box:hover {
+  -fx-background-color: white;
+}
+
+.choice-box > .label:hover {
+  -fx-text-fill: red;
+}
+
+.choice-box > .label {
+  -fx-text-fill: white;
+  -fx-font-size: 14px;
+  -fx-font-weight: bold;
+}
+.choice-box .context-menu {
+  -fx-pref-width: 150px;
+  -fx-background-color: red;
+  -fx-font-size: 14px;
+  -fx-font-weight: bold;
+  -fx-background-radius: 25px;
+}
+.choice-box .menu-item:focused {
+  -fx-background-color: white;
+  -fx-pref-width: 150px;
+}
+.choice-box .menu-item > .label {
+  -fx-text-fill: white;
+
+  -fx-font-size: 14px;
+}
+.choice-box .menu-item:focused > .label {
+  -fx-text-fill: black;
 }
 
 #title {
-	-fx-font-size: 48px;
+  -fx-font-size: 48px;
 }
 
 .text-field {
-	-fx-border-color: blue;
-	-fx-border-width: 3px;
-	-fx-border-radius: 25px;
-	-fx-background-radius: 25px;
-	-fx-pref-column-count: 25;
+  -fx-border-color: blue;
+  -fx-border-width: 3px;
+  -fx-border-radius: 25px;
+  -fx-background-radius: 25px;
+  -fx-pref-column-count: 25;
 }
 
 .fancy-button {
-	-fx-background-color: red;
-	-fx-text-fill: white;
+  -fx-background-color: red;
+  -fx-text-fill: white;
+  -fx-pref-width: 150px;
+  -fx-background-radius: 25px;
+  -fx-font-weight: bold;
+  -fx-font-size: 14px;
 }
 
-
- 
 .fancy-button:hover {
-	-fx-background-color: white;
-	-fx-text-fill: red;
+  -fx-background-color: white;
+  -fx-text-fill: red;
 }
 
 .fancy-button:pressed {
-	-fx-background-color: #E8DCDC;
-	-fx-text-fill: #B62020;
+  -fx-background-color: #e8dcdc;
+  -fx-text-fill: #b62020;
 }
- 
-

@@ -6,15 +6,10 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.internal.build.AllowSysOut;
 import org.hibernate.query.Query;
 
-import projectRecruiterPlus.App;
-import projectRecruiterPlus.Entities.TeamOfRecruitment;
 import projectRecruiterPlus.Entities.User;
-import projectRecruiterPlus.Entities.Roles.CompanyRole;
-import projectRecruiterPlus.Entities.Roles.Recruiter;
-import projectRecruiterPlus.Util.Interface.DaoInterfaceUser;
+import projectRecruiterPlus.Util.Interface.Dao.DaoInterfaceUser;
 import projectRecruiterPlus.Util.Other.CompanyRoleType;
 import projectRecruiterPlus.Util.Other.EncryptPassword;
 
@@ -38,7 +33,7 @@ public class DaoUser implements DaoInterfaceUser {
 		user.setPassword(encryptPass.decrypt(user.getPassword()));
 		return user;
 	}
-	
+
 	@Override
 	public User getbyUsername(String username) {
 		Query<User> query = session.createQuery("from User where username = :parameter1");
@@ -176,14 +171,17 @@ public class DaoUser implements DaoInterfaceUser {
 	}
 
 	@Override
-	public boolean promote(User u, CompanyRole role) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public boolean terminate(User u, Date date) {
-		// TODO Auto-generated method stub
+		u.setActiveAccount(false);
+		u.setLastDayWork(date);
+		try {
+			save(u);
+			return true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}
 		return false;
 	}
 

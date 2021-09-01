@@ -57,4 +57,5 @@ public class TeamOfRecruitment {
 	
 	@Column
 	private Date birthday;
+	
 }

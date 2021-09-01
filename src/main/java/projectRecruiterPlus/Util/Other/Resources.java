@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import projectRecruiterPlus.Entities.User;
+import projectRecruiterPlus.Util.DAO.DaoTeamOfRecruitment;
 import projectRecruiterPlus.Util.DAO.DaoUser;
 import projectRecruiterPlus.Util.Hibernate.HibernateUtil;
 
@@ -21,11 +22,13 @@ public class Resources {
 	private Session session;
 	private Transaction transaction;
 	private DaoUser daoUser;
+	private DaoTeamOfRecruitment DaoTeamRec;
 	
 	public Resources() throws Exception  {
 		this.session = HibernateUtil.getSessionFactory().openSession();
 		this.transaction = session.beginTransaction();
 		this.daoUser = new DaoUser(session, transaction);
+		this.DaoTeamRec = new DaoTeamOfRecruitment(session, transaction);
 	}
 	
 	public void stopSessionAndTransaction() {

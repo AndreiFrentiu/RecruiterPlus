@@ -1,6 +1,7 @@
 package projectRecruiterPlus.Entities;
 
-import java.sql.Date;
+
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -76,6 +77,10 @@ public class User extends Person {
 		this.username = username;
 		this.password = password;
 		this.activeAccount=true;
+	}
+
+	public void setCompanyRole(CompanyRole role) {
+		this.rol = role;
 	}
 	
 	

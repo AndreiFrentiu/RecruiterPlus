@@ -1,0 +1,19 @@
+{
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.project.referencedLibraries": {
+        "include": [
+            "library/**/*.jar",
+            "/home/username/lib/foo.jar"
+        ],
+        "exclude": [
+            "library/sources/**"
+        ],
+        "sources": {
+            "library/bar.jar": "library/sources/bar-src.jar"
+        },
+        "java.project.referencedLibraries": [
+            "library/**/*.jar",
+            "/home/username/lib/foo.jar"
+        ]
+    }
+}

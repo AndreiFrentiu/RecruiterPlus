@@ -1,4 +1,4 @@
-package projectRecruiterPlus.Util.Interface;
+package projectRecruiterPlus.Util.Interface.Dao;
 
 import java.util.Date;
 import java.util.List;
@@ -32,8 +32,6 @@ public interface DaoInterfaceUser {
 	boolean changePassword(User u, String s);
 	
 	boolean updateUsername(User u, String username);
-	
-	boolean promote(User u, CompanyRole role);
 	
 	boolean terminate(User u, Date date);
 	

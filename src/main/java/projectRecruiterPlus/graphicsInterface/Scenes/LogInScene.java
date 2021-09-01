@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import projectRecruiterPlus.App;
 import projectRecruiterPlus.Entities.User;
+import projectRecruiterPlus.Util.Other.TimeCounter;
 import projectRecruiterPlus.graphicsInterface.Alerts.AlertBoxExit;
 
 public class LogInScene {
@@ -66,29 +67,31 @@ public class LogInScene {
 			if (App.resources.getDaoUser().verifyPassword(user) && App.resources.getDaoUser().verifyIfExists(user)) {
 				App.resources.setMainUser(App.resources.getDaoUser().getbyUsername(user.getUsername()));
 				if (App.resources.getMainUser().isActiveAccount()) {
-					AdminScene.scene(window);		
+					App.timeCounter.start();
+					AdminScene.scene(window);				
 				} else {
 					App.resources.setMainUser(new User());
 					shadow.setTextFill(Color.web("#FFFFFF"));
 					shadow.setText("Account is inactive! Please contact your administrator.");
-			}
-		} else {
+				}
+			} else {
 				shadow.setTextFill(Color.web("#FFFFFF"));
 				shadow.setText("Username and password not accepted!");
-		}
+			}
 			System.out.println("Log In button");
 		});
+		exitButton.getStyleClass().add("fancy-button");
+		exitButton.setOnAction(e -> {
+			if (AlertBoxExit.display()) {
+				window.close();
+			}
+			System.out.println("Exit program!");
+		});
 
-	exitButton.getStyleClass().add("fancy-button");exitButton.setOnAction(e->
+		buttons.setAlignment(Pos.CENTER);
+		buttons.setSpacing(10);
+		buttons.getChildren().addAll(logInButton, exitButton);
 
-	{
-		if (AlertBoxExit.display()) {
-			window.close();
-		}
-		System.out.println("Exit program!");
-	});
-
-	buttons.setAlignment(Pos.CENTER);buttons.setSpacing(10);buttons.getChildren().addAll(logInButton,exitButton);
-
-	return buttons;
-}}
+		return buttons;
+	}
+}

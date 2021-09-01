@@ -9,12 +9,14 @@ import projectRecruiterPlus.Entities.Roles.Manager;
 import projectRecruiterPlus.Entities.Roles.Recruiter;
 import projectRecruiterPlus.Entities.Roles.TeamLead;
 import projectRecruiterPlus.Util.Other.Resources;
+import projectRecruiterPlus.Util.Other.TimeCounter;
 import projectRecruiterPlus.graphicsInterface.Alerts.AlertBoxExit;
 import projectRecruiterPlus.graphicsInterface.Scenes.LogInScene;
 
 public class App extends Application {
 
 	public static Resources resources;
+	public static TimeCounter timeCounter;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -24,12 +26,14 @@ public class App extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		resources = new Resources();
 		LogInScene.scene(primaryStage);
+		timeCounter = new TimeCounter();	
 		addinfo();
 
 		primaryStage.setOnCloseRequest(e -> {
 			e.consume();
 			if (AlertBoxExit.display()) {
 				primaryStage.close();
+				timeCounter.stopCount();
 			}
 		});
 	}
