@@ -1,7 +1,7 @@
 package projectRecruiterPlus.Entities;
 
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -42,14 +42,14 @@ public class User extends Person {
 	private String password;
 	
 	@Column
-	private Date birthday;
+	private LocalDate birthday;
 	
 	@Column
-	private Date firstDayWork;
+	private LocalDate firstDayWork;
 	
 	@Column
 	@Nullable
-	private Date lastDayWork;
+	private LocalDate lastDayWork;
 	
 	@Column
 	private boolean activeAccount;
@@ -77,6 +77,9 @@ public class User extends Person {
 		this.username = username;
 		this.password = password;
 		this.activeAccount=true;
+		this.birthday=LocalDate.EPOCH;
+		this.firstDayWork=LocalDate.EPOCH;
+		this.lastDayWork=LocalDate.EPOCH;
 	}
 
 	public void setCompanyRole(CompanyRole role) {

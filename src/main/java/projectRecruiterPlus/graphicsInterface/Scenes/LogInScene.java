@@ -62,13 +62,15 @@ public class LogInScene {
 
 		logInButton.getStyleClass().add("fancy-button");
 		logInButton.setOnAction(e -> {
+			
 			User user = new User(textField.getText(), passwordField.getText());
-			System.out.println(App.resources.getDaoUser().verifyPassword(user));
 			if (App.resources.getDaoUser().verifyPassword(user) && App.resources.getDaoUser().verifyIfExists(user)) {
+				// Aici
 				App.resources.setMainUser(App.resources.getDaoUser().getbyUsername(user.getUsername()));
+				// Acolo
 				if (App.resources.getMainUser().isActiveAccount()) {
 					App.timeCounter.start();
-					AdminScene.scene(window);				
+					AdminScene.scene(window);
 				} else {
 					App.resources.setMainUser(new User());
 					shadow.setTextFill(Color.web("#FFFFFF"));
@@ -78,7 +80,9 @@ public class LogInScene {
 				shadow.setTextFill(Color.web("#FFFFFF"));
 				shadow.setText("Username and password not accepted!");
 			}
+
 			System.out.println("Log In button");
+
 		});
 		exitButton.getStyleClass().add("fancy-button");
 		exitButton.setOnAction(e -> {

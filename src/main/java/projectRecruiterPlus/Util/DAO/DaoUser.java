@@ -1,5 +1,6 @@
 package projectRecruiterPlus.Util.DAO;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,7 +31,6 @@ public class DaoUser implements DaoInterfaceUser {
 	@Override
 	public User getById(int id) {
 		User user = session.get(User.class, id);
-		user.setPassword(encryptPass.decrypt(user.getPassword()));
 		return user;
 	}
 
@@ -40,7 +40,6 @@ public class DaoUser implements DaoInterfaceUser {
 		query.setParameter("parameter1", username);
 		ArrayList<User> list = (ArrayList<User>) query.list();
 		User user = list.get(0);
-		user.setPassword(encryptPass.decrypt(user.getPassword()));
 		return user;
 	}
 
@@ -73,9 +72,9 @@ public class DaoUser implements DaoInterfaceUser {
 		if (verifyPassword(user)) {
 			Query<User> query = session
 					.createQuery("update User set password=:par1 where username =:par2 and password =:par3");
-			query.setParameter("par1", incriptPassword(newPassword));
+			query.setParameter("par1", encryptPass.encrypt(newPassword));
 			query.setParameter("par2", user.getUsername());
-			query.setParameter("par3", incriptPassword(user.getPassword()));
+			query.setParameter("par3", encryptPass.encrypt(user.getPassword()));
 			query.executeUpdate();
 			return true;
 		}
@@ -97,26 +96,17 @@ public class DaoUser implements DaoInterfaceUser {
 		}
 	}
 
-	// save the user to the database
 	@Override
 	public void save(User user) throws Exception {
-		String toEncrypt = user.getPassword();
-		user.setPassword(incriptPassword(toEncrypt));
+		user.setPassword(encryptPass.encrypt(user.getPassword()));
 		session.save(user);
 	}
-
-	private String incriptPassword(String pass) {
-		return encryptPass.encrypt(pass);
-	}
-
+	
 //</Password management>
 	@Override
 	public List<User> getAll() {
 		Query<User> query = session.createQuery("from User");
 		ArrayList<User> list = (ArrayList<User>) query.list();
-		for (User user : list) {
-			user.setPassword(encryptPass.decrypt(user.getPassword()));
-		}
 		return list;
 	}
 
@@ -140,9 +130,6 @@ public class DaoUser implements DaoInterfaceUser {
 			System.out.println("CustomRole");
 		}
 		List<User> list = query.list();
-		for (User user : list) {
-			user.setPassword(encryptPass.decrypt(user.getPassword()));
-		}
 		return list;
 	}
 
@@ -150,9 +137,6 @@ public class DaoUser implements DaoInterfaceUser {
 	public List<User> getTeamOfRecruitment(String teamName) {
 		Query<User> query = session.createQuery("from TeamOFRecruitment where ");
 		ArrayList<User> list = (ArrayList<User>) query.list();
-		for (User user : list) {
-			user.setPassword(encryptPass.decrypt(user.getPassword()));
-		}
 		return list;
 	}
 
@@ -163,7 +147,7 @@ public class DaoUser implements DaoInterfaceUser {
 					.createQuery("update User set username=:par1 where username = :par2 and password = :par3");
 			query.setParameter("par1", username);
 			query.setParameter("par2", user.getUsername());
-			query.setParameter("par3", incriptPassword(user.getPassword()));
+			query.setParameter("par3", encryptPass.encrypt(user.getPassword()));
 			query.executeUpdate();
 			return true;
 		}
@@ -171,7 +155,7 @@ public class DaoUser implements DaoInterfaceUser {
 	}
 
 	@Override
-	public boolean terminate(User u, Date date) {
+	public boolean terminate(User u, LocalDate date) {
 		u.setActiveAccount(false);
 		u.setLastDayWork(date);
 		try {
@@ -180,7 +164,7 @@ public class DaoUser implements DaoInterfaceUser {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			
+
 		}
 		return false;
 	}

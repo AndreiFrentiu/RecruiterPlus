@@ -1,10 +1,9 @@
 package projectRecruiterPlus.Util.Interface.Dao;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import projectRecruiterPlus.Entities.User;
-import projectRecruiterPlus.Entities.Roles.CompanyRole;
 import projectRecruiterPlus.Util.Other.CompanyRoleType;
 
 public interface DaoInterfaceUser {
@@ -33,7 +32,7 @@ public interface DaoInterfaceUser {
 	
 	boolean updateUsername(User u, String username);
 	
-	boolean terminate(User u, Date date);
+	boolean terminate(User u, LocalDate date);
 	
 	boolean updateDetails(User u, String[] args);
 

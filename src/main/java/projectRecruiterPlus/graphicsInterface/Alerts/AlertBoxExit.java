@@ -20,7 +20,6 @@ public class AlertBoxExit {
 	
 	static boolean answer;
 	
-	
 	public static boolean display() {
 	
 		BorderPane border = new BorderPane();
