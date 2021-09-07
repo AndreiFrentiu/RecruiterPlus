@@ -23,14 +23,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-/* Lombok */
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Setter
 @Getter
-
-/* Hibernate */
 @Entity
 @Table(name = "project")
 public class Project {

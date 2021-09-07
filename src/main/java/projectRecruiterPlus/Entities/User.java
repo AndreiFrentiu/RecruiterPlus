@@ -22,15 +22,11 @@ import lombok.Setter;
 import lombok.ToString;
 import projectRecruiterPlus.Entities.Roles.CompanyRole;
 
-
-//Lombok help
 @Setter
 @Getter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-
-//Hibernate
 @Entity
 @Table
 public class User extends Person {

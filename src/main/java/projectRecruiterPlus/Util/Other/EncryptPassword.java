@@ -10,8 +10,6 @@ import javax.crypto.spec.DESedeKeySpec;
 
 public class EncryptPassword {
 
-	// This is added from another code that is not mine. I understand how it works
-	// but not how to make it!
 	private static final String UNICODE_FORMAT = "UTF8";
 	private static final String DESEDE_ENCRYPTION_SCHEME = "DESede";
 	private KeySpec ks;

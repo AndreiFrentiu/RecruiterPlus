@@ -13,15 +13,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-//Lombok help
 @Setter
 @Getter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-
-//Hibernate
-
 @Table(name = "person")
 @MappedSuperclass
 public class Person {

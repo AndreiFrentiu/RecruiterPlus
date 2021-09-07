@@ -14,19 +14,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import projectRecruiterPlus.Entities.TeamOfRecruitment;
 import projectRecruiterPlus.Entities.User;
-import projectRecruiterPlus.Util.Interface.TeamLeadInterface;
 
-//lombok help
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-
-//hibernate settings
 @Entity
 @Table
 @DiscriminatorValue("Teamlead")
-public class TeamLead extends CompanyRole implements TeamLeadInterface{
+public class TeamLead extends CompanyRole {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private TeamOfRecruitment team;

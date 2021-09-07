@@ -1,9 +1,6 @@
 package projectRecruiterPlus;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
 
 import javafx.application.Application;
 import javafx.stage.Stage;

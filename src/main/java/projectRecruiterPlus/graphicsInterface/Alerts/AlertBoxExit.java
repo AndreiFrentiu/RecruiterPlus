@@ -18,44 +18,44 @@ import lombok.Setter;
 @Getter
 public class AlertBoxExit {
 	
-	static boolean answer;
+	static private boolean answer;
 	
 	public static boolean display() {
 	
 		BorderPane border = new BorderPane();
-		
 		Stage window = new Stage();
-		window.initModality(Modality.APPLICATION_MODAL);
-		window.setTitle("Exit game");
-		window.setMinWidth(250);
-		
+		Button exitGame = new Button("Exit");
+		Button returnToGame = new Button("Cancel");
 		final Label label = new Label("Are you sure you want to exit ?");
 		final Label shadow = new Label(" ");
+		VBox layout = new VBox(10);
+		HBox buttons = new HBox(10);
+		Scene scene = new Scene(border, 250, 125);
+		
+		window.initModality(Modality.APPLICATION_MODAL);
+		window.setTitle("Exit App");
+		window.setMinWidth(250);
 			
-		Button exitGame = new Button("Exit game");
-		Button returnToGame = new Button("Cancel");
 		returnToGame.setOnAction(e -> {
 			answer = false;
 			window.close();
 		});
+		
 		exitGame.setOnAction(e -> {
 			answer = true;
 			window.close();
 		});
 		
-		VBox layout = new VBox(10);
 		layout.getChildren().addAll(shadow, label);
 		layout.setAlignment(Pos.CENTER);
-		border.setTop(layout);
 		
-		HBox buttons = new HBox(10);
 		buttons.getChildren().addAll(returnToGame, exitGame);
 		buttons.setAlignment(Pos.CENTER);
-		border.setCenter(buttons);
 		
-		border.getStylesheets().add("projectRecruiterPlus/graphicsInterface/CSS/styleExitGame.css");
+		border.setCenter(buttons);
+		border.setTop(layout);
+		border.getStylesheets().add("projectRecruiterPlus/graphicsInterface/CSS/styleExitProgram.css");
 
-		Scene scene = new Scene(border, 250, 125);
 		window.setScene(scene);
 		window.showAndWait();
 		

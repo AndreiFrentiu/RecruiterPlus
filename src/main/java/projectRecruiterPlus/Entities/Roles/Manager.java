@@ -13,19 +13,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import projectRecruiterPlus.Entities.User;
-import projectRecruiterPlus.Util.Interface.ManagerInterface;
 
-//Lombok
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-
-//hibernate settings
 @Entity
 @Table
 @DiscriminatorValue("Manager")
-public class Manager extends CompanyRole implements ManagerInterface {
+public class Manager extends CompanyRole {
 
 	@OneToMany(mappedBy = "manager", cascade = CascadeType.ALL)
 	private List<TeamLead> teamLeaders;

@@ -7,17 +7,13 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import projectRecruiterPlus.Entities.User;
-import projectRecruiterPlus.Util.Interface.RecruiterInterface;
 
-//Lombok
 @Setter
 @Getter
-
-//hibernate settings
 @Entity
 @Table
 @DiscriminatorValue("Customrole")
-public class CustomRole extends CompanyRole implements RecruiterInterface{
+public class CustomRole extends CompanyRole {
 
 	public CustomRole(User user, int accesLevel, String name, String description, float points) {
 		super.acessLevel = accesLevel;

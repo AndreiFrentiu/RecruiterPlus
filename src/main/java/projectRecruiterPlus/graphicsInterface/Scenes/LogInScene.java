@@ -34,18 +34,17 @@ public class LogInScene {
 		final Label labelWelcome = new Label("Welcome!");
 		final Label labelUsername = new Label("Username:");
 		final Label labelPassword = new Label("Password:");
-
+		TextField textField = new TextField();
+		PasswordField passwordField = new PasswordField();
+		HBox buttons = addButtons(window, textField, passwordField, shadow);
+		
 		labelWelcome.setId("title");
 
-		TextField textField = new TextField();
 		textField.setMaxSize(250, 50);
 		textField.setPromptText("Your username");
 
-		PasswordField passwordField = new PasswordField();
 		passwordField.setMaxSize(250, 50);
 		passwordField.setPromptText("Your password");
-
-		HBox buttons = addButtons(window, textField, passwordField, shadow);
 
 		layoutLogIn.setAlignment(Pos.CENTER);
 		layoutLogIn.setSpacing(10);
@@ -62,15 +61,12 @@ public class LogInScene {
 
 		logInButton.getStyleClass().add("fancy-button");
 		logInButton.setOnAction(e -> {
-			
 			User user = new User(textField.getText(), passwordField.getText());
 			if (App.resources.getDaoUser().verifyPassword(user) && App.resources.getDaoUser().verifyIfExists(user)) {
-				// Aici
 				App.resources.setMainUser(App.resources.getDaoUser().getbyUsername(user.getUsername()));
-				// Acolo
 				if (App.resources.getMainUser().isActiveAccount()) {
 					App.timeCounter.start();
-					AdminScene.scene(window);
+					AdminScene.setScene(window);
 				} else {
 					App.resources.setMainUser(new User());
 					shadow.setTextFill(Color.web("#FFFFFF"));
@@ -84,6 +80,7 @@ public class LogInScene {
 			System.out.println("Log In button");
 
 		});
+		
 		exitButton.getStyleClass().add("fancy-button");
 		exitButton.setOnAction(e -> {
 			if (AlertBoxExit.display()) {

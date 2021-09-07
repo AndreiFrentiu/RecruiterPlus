@@ -22,19 +22,15 @@ import lombok.Setter;
 import lombok.ToString;
 import projectRecruiterPlus.Util.Other.CandidateStatus;
 
-/* Lombok */
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Setter
 @Getter
-
-/* Hibernate */
 @Entity
 @Table
 public class Candidate extends Person {
 
-	//TODO realizeaza o metodata de a semnala un candidat angajat recent de companie
 	@Column
 	private String lastRole;
 

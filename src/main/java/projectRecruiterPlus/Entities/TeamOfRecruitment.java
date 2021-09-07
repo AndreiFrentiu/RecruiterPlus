@@ -22,14 +22,11 @@ import lombok.Setter;
 import lombok.ToString;
 import projectRecruiterPlus.Entities.Roles.TeamLead;
 
-//Lombok help
 @Setter
 @Getter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-
-//Hibernate
 @Entity(name = "TeamOfRecruitment")
 @Table(name = "TeamOfRecruitment")
 public class TeamOfRecruitment {

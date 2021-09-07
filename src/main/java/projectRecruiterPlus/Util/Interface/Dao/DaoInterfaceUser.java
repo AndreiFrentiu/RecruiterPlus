@@ -24,10 +24,8 @@ public interface DaoInterfaceUser {
 	
 	List<User> getTeamOfRecruitment(String teamName);
 	
-	//delete
 	void deleteUser(User u);
 
-	//update
 	boolean changePassword(User u, String s);
 	
 	boolean updateUsername(User u, String username);

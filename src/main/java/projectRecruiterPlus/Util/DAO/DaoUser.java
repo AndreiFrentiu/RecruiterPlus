@@ -20,8 +20,6 @@ public class DaoUser implements DaoInterfaceUser {
 	private Transaction transaction;
 	private EncryptPassword encryptPass;
 
-	// We create a object with the parameters for easy-use of the Session and
-	// Transaction to make the program run faster
 	public DaoUser(Session session, Transaction transaction) throws Exception {
 		this.session = session;
 		this.transaction = transaction;
@@ -39,7 +37,12 @@ public class DaoUser implements DaoInterfaceUser {
 		Query<User> query = session.createQuery("from User where username = :parameter1");
 		query.setParameter("parameter1", username);
 		ArrayList<User> list = (ArrayList<User>) query.list();
-		User user = list.get(0);
+		User user;
+		try {
+			user = list.get(0);
+		} catch (Exception e) {
+			return new User("null", "null");
+		}
 		return user;
 	}
 
@@ -64,9 +67,6 @@ public class DaoUser implements DaoInterfaceUser {
 		transaction.commit();
 	}
 
-//<Password management>
-	// Change password
-	// Return true if the password was chanced
 	@Override
 	public boolean changePassword(User user, String newPassword) {
 		if (verifyPassword(user)) {
@@ -81,8 +81,6 @@ public class DaoUser implements DaoInterfaceUser {
 		return false;
 	}
 
-	// Verify if the player has this password
-	// Returns true if the password and the user are good
 	@Override
 	public boolean verifyPassword(User user) {
 		Query<User> query = session.createQuery("from User where username = :parameter1 and password = :parameter2");
@@ -102,7 +100,6 @@ public class DaoUser implements DaoInterfaceUser {
 		session.save(user);
 	}
 	
-//</Password management>
 	@Override
 	public List<User> getAll() {
 		Query<User> query = session.createQuery("from User");

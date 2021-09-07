@@ -14,8 +14,6 @@ public class DaoTeamOfRecruitment implements DaoInterfaceTeamOfRecruitment {
 	private Session session;
 	private Transaction transaction;
 
-	// We create a object with the parameters for easy-use of the Session and
-	// Transaction to make the program run faster
 	public DaoTeamOfRecruitment(Session session, Transaction transaction) throws Exception {
 		this.session = session;
 		this.transaction = transaction;

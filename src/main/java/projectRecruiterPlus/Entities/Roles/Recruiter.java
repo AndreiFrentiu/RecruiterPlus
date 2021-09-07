@@ -8,17 +8,13 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import projectRecruiterPlus.Entities.User;
-import projectRecruiterPlus.Util.Interface.RecruiterInterface;
 
-//Lombok
 @Setter
 @Getter
-
-//hibernate settings
 @Entity
 @Table
 @DiscriminatorValue("Recruiter")
-public class Recruiter extends CompanyRole implements RecruiterInterface {
+public class Recruiter extends CompanyRole {
 
 	// TODO create 3 new ranks from recruiter that have more points to do and trains
 	// a new recruiter

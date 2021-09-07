@@ -18,13 +18,11 @@ import lombok.Setter;
 import lombok.ToString;
 import projectRecruiterPlus.Entities.User;
 
-//lombok help
 @Setter
 @Getter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-//hibernate
 @Entity(name = "companyRole")
 @Table(name = "companyRole")
 @DiscriminatorColumn(name = "CompanyRoleTag", discriminatorType = DiscriminatorType.STRING)
