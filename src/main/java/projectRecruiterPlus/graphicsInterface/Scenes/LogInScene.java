@@ -20,10 +20,11 @@ public class LogInScene {
 
 	public static void scene(Stage window) {
 		BorderPane border = new BorderPane();
+		Scene scene1_Login = new Scene(border, 1920, 1080);
+		
 		border.setCenter(addCenter(window));
 		border.getStylesheets().add("projectRecruiterPlus/graphicsInterface/CSS/styleLoginScene.css");
-
-		Scene scene1_Login = new Scene(border, 1920, 1080);
+		
 		window.setScene(scene1_Login);
 		window.show();
 	}
@@ -83,7 +84,8 @@ public class LogInScene {
 		
 		exitButton.getStyleClass().add("fancy-button");
 		exitButton.setOnAction(e -> {
-			if (AlertBoxExit.display()) {
+			AlertBoxExit alertBox = new AlertBoxExit();
+			if (alertBox.display()) {
 				window.close();
 			}
 			System.out.println("Exit program!");

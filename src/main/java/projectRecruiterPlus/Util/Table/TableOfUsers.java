@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -16,94 +17,118 @@ import projectRecruiterPlus.Entities.User;
 
 public class TableOfUsers {
 
-	private TableView<UserTable> table = new TableView<UserTable>();
-	private ArrayList<UserTable> listOfUsersTable = new ArrayList<UserTable>();
+	private TableView<UserInTable> table = new TableView<UserInTable>();
+	private ArrayList<UserInTable> listOfUsersTable = new ArrayList<UserInTable>();
 	private ArrayList<User> listOfUsers = (ArrayList<User>) App.resources.getDaoUser().getAll();
-	private ObservableList<UserTable> data= FXCollections.observableArrayList(listOfUsersTable);
+	private Label shadow = new Label(" ");
+	private ObservableList<UserInTable> data;
 	
-	private TableColumn<UserTable, String> usernameCol = new TableColumn<UserTable, String>("Username");
-	private TableColumn<UserTable, String> firstNameCol = new TableColumn<UserTable, String>("First Name");
-	private TableColumn<UserTable, String> lastNameCol = new TableColumn<UserTable, String>("Last Name");
-	private TableColumn<UserTable, String> emailCol = new TableColumn<UserTable, String>("Email");
-	private TableColumn<UserTable, String> adressCol = new TableColumn<UserTable, String>("Adress");
-	private TableColumn<UserTable, LocalDate> birthdayCol = new TableColumn<UserTable, LocalDate>("Birthday");
-	private TableColumn<UserTable, LocalDate> firstDayOfWorkCol = new TableColumn<UserTable, LocalDate>("Start date");
-	private TableColumn<UserTable, LocalDate> lastDayOfWorkCol = new TableColumn<UserTable, LocalDate>("Last day");
-	private TableColumn<UserTable, Double> grossSalaryCol = new TableColumn<UserTable, Double>("Gross Salary");
-	private TableColumn<UserTable, Double> netSalaryCol = new TableColumn<UserTable, Double>("Net Salary");
-	private TableColumn<UserTable, Integer> vacationCol = new TableColumn<UserTable, Integer>("Vacation Days");
-	private TableColumn<UserTable, String> rolCol = new TableColumn<UserTable, String>("Company Role");
-	private TableColumn<UserTable, String> teamCol = new TableColumn<UserTable, String>("Team");
+	private TableColumn<UserInTable, String> usernameCol = new TableColumn<UserInTable, String>("Username");
+	private TableColumn<UserInTable, String> firstNameCol = new TableColumn<UserInTable, String>("First Name");
+	private TableColumn<UserInTable, String> lastNameCol = new TableColumn<UserInTable, String>("Last Name");
+	private TableColumn<UserInTable, String> emailCol = new TableColumn<UserInTable, String>("Email");
+	private TableColumn<UserInTable, String> adressCol = new TableColumn<UserInTable, String>("Adress");
+	private TableColumn<UserInTable, LocalDate> birthdayCol = new TableColumn<UserInTable, LocalDate>("Birthday");
+	private TableColumn<UserInTable, LocalDate> firstDayOfWorkCol = new TableColumn<UserInTable, LocalDate>("Start date");
+	private TableColumn<UserInTable, LocalDate> lastDayOfWorkCol = new TableColumn<UserInTable, LocalDate>("Last day");
+	private TableColumn<UserInTable, Double> grossSalaryCol = new TableColumn<UserInTable, Double>("Gross Salary");
+	private TableColumn<UserInTable, Double> netSalaryCol = new TableColumn<UserInTable, Double>("Net Salary");
+	private TableColumn<UserInTable, Integer> vacationCol = new TableColumn<UserInTable, Integer>("Vacation Days");
+	private TableColumn<UserInTable, String> rolCol = new TableColumn<UserInTable, String>("Company Role");
+	private TableColumn<UserInTable, String> teamCol = new TableColumn<UserInTable, String>("Team");
 	private Button refresh = new Button("Refresh");
 	private final VBox vbox = new VBox();
 
 	public VBox addVBoxTable() {
-		for (User user : listOfUsers) {
-			listOfUsersTable.add(new UserTable(user));
-		}
-		
-		
+
+		editColumns();
+		editRefreshButton();
+		editTable();
+
+		vbox.getStylesheets().add("projectRecruiterPlus/graphicsInterface/CSS/styleTable.css");
+		vbox.setSpacing(5);
+		vbox.setPadding(new Insets(10, 0, 0, 10));
+		vbox.getChildren().addAll(table, refresh, shadow);
+
+		return vbox;
+	}
+	
+	private void editColumns() {
 		usernameCol.setMinWidth(150);
-		usernameCol.setCellValueFactory(new PropertyValueFactory<UserTable, String>("username"));
+		usernameCol.setMaxWidth(300);
+		usernameCol.setCellValueFactory(new PropertyValueFactory<UserInTable, String>("username"));
 	
 		firstNameCol.setMinWidth(120);
-		firstNameCol.setCellValueFactory(new PropertyValueFactory<UserTable, String>("firstName"));
+		firstNameCol.setMaxWidth(300);
+		firstNameCol.setCellValueFactory(new PropertyValueFactory<UserInTable, String>("firstName"));
 		
 		lastNameCol.setMinWidth(120);
-		lastNameCol.setCellValueFactory(new PropertyValueFactory<UserTable, String>("lastName"));
+		lastNameCol.setMaxWidth(300);
+		lastNameCol.setCellValueFactory(new PropertyValueFactory<UserInTable, String>("lastName"));
 
 		emailCol.setMinWidth(200);
-		emailCol.setCellValueFactory(new PropertyValueFactory<UserTable, String>("email"));
+		emailCol.setMaxWidth(300);
+		emailCol.setCellValueFactory(new PropertyValueFactory<UserInTable, String>("email"));
 
 		adressCol.setMinWidth(150);
-		adressCol.setCellValueFactory(new PropertyValueFactory<UserTable, String>("adress"));
+		adressCol.setMaxWidth(300);
+		adressCol.setCellValueFactory(new PropertyValueFactory<UserInTable, String>("adress"));
 
 		birthdayCol.setMinWidth(100);
-		birthdayCol.setCellValueFactory(new PropertyValueFactory<UserTable, LocalDate>("birthday"));
+		birthdayCol.setMaxWidth(300);
+		birthdayCol.setCellValueFactory(new PropertyValueFactory<UserInTable, LocalDate>("birthday"));
 
 		firstDayOfWorkCol.setMinWidth(100);
-		firstDayOfWorkCol.setCellValueFactory(new PropertyValueFactory<UserTable, LocalDate>("firstDayWork"));
+		firstDayOfWorkCol.setMaxWidth(300);
+		firstDayOfWorkCol.setCellValueFactory(new PropertyValueFactory<UserInTable, LocalDate>("firstDayWork"));
 
 		lastDayOfWorkCol.setMinWidth(100);
-		lastDayOfWorkCol.setCellValueFactory(new PropertyValueFactory<UserTable, LocalDate>("lastDayWork"));
+		lastDayOfWorkCol.setMaxWidth(300);
+		lastDayOfWorkCol.setCellValueFactory(new PropertyValueFactory<UserInTable, LocalDate>("lastDayWork"));
 		
-		grossSalaryCol.setMinWidth(120);
-		grossSalaryCol.setCellValueFactory(new PropertyValueFactory<UserTable, Double>("grossSalary"));
+		grossSalaryCol.setMinWidth(115);
+		grossSalaryCol.setMaxWidth(300);
+		grossSalaryCol.setCellValueFactory(new PropertyValueFactory<UserInTable, Double>("grossSalary"));
 		
-		netSalaryCol.setMinWidth(120);
-		netSalaryCol.setCellValueFactory(new PropertyValueFactory<UserTable, Double>("netSalary"));
+		netSalaryCol.setMinWidth(115);
+		netSalaryCol.setMaxWidth(300);
+		netSalaryCol.setCellValueFactory(new PropertyValueFactory<UserInTable, Double>("netSalary"));
 		
 		vacationCol.setMinWidth(100);
-		vacationCol.setCellValueFactory(new PropertyValueFactory<UserTable, Integer>("vacationDays"));
+		vacationCol.setMaxWidth(300);
+		vacationCol.setCellValueFactory(new PropertyValueFactory<UserInTable, Integer>("vacationDays"));
 		
 		rolCol.setMinWidth(120);
-		rolCol.setCellValueFactory(new PropertyValueFactory<UserTable, String>("roleName"));
+		rolCol.setMaxWidth(300);
+		rolCol.setCellValueFactory(new PropertyValueFactory<UserInTable, String>("roleName"));
 		
 		teamCol.setMinWidth(120);
-		teamCol.setCellValueFactory(new PropertyValueFactory<UserTable, String>("team"));
-
+		teamCol.setMaxWidth(300);
+		teamCol.setCellValueFactory(new PropertyValueFactory<UserInTable, String>("team"));
+	}
+	
+	private void editRefreshButton() {
+		refresh.getStyleClass().add("fancy-button");
+		refresh.setOnAction(e -> {
+			ArrayList<UserInTable> listOfUsersTable2 = new ArrayList<UserInTable>();
+			ArrayList<User> listOfUsers2 = (ArrayList<User>) App.resources.getDaoUser().getAll();
+			for (User user : listOfUsers2) {
+				listOfUsersTable2.add(new UserInTable(user));
+			}
+			ObservableList<UserInTable> data2 = FXCollections.observableArrayList(listOfUsersTable2);
+			table.setItems(data2);
+		});
+	}
+	
+	private void editTable() {
+		for (User user : listOfUsers) 
+			listOfUsersTable.add(new UserInTable(user));
+		data = FXCollections.observableArrayList(listOfUsersTable);
 		table.getColumns().addAll(usernameCol, firstNameCol, lastNameCol, emailCol, adressCol, birthdayCol,
 				firstDayOfWorkCol, lastDayOfWorkCol, grossSalaryCol, netSalaryCol, vacationCol, rolCol, teamCol);
 		table.setEditable(true);
 		table.setItems(data);
-
-		refresh.getStyleClass().add("fancy-button");
-		refresh.setOnAction(e -> {
-			ArrayList<UserTable> listOfUsersTable2 = new ArrayList<UserTable>();
-			ArrayList<User> listOfUsers2 = (ArrayList<User>) App.resources.getDaoUser().getAll();
-			for (User user : listOfUsers2) {
-				listOfUsersTable2.add(new UserTable(user));
-			}
-			ObservableList<UserTable> data2 = FXCollections.observableArrayList(listOfUsersTable2);
-			table.setItems(data2);
-		});
-
-		vbox.setSpacing(5);
-		vbox.setPadding(new Insets(10, 0, 0, 10));
-		vbox.getChildren().addAll(table, refresh);
-
-		return vbox;
+		table.prefHeightProperty().bind(vbox.heightProperty());
+        table.prefWidthProperty().bind(vbox.widthProperty());
 	}
-
-	
 }

@@ -11,17 +11,18 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Setter
 @Getter
 public class AlertBoxExit {
 	
-	static private boolean answer;
+	private boolean answer;
 	
-	public static boolean display() {
-	
+	public boolean display() {
 		BorderPane border = new BorderPane();
 		Stage window = new Stage();
 		Button exitGame = new Button("Exit");
@@ -31,31 +32,24 @@ public class AlertBoxExit {
 		VBox layout = new VBox(10);
 		HBox buttons = new HBox(10);
 		Scene scene = new Scene(border, 250, 125);
-		
-		window.initModality(Modality.APPLICATION_MODAL);
-		window.setTitle("Exit App");
-		window.setMinWidth(250);
-			
 		returnToGame.setOnAction(e -> {
 			answer = false;
 			window.close();
 		});
-		
 		exitGame.setOnAction(e -> {
 			answer = true;
 			window.close();
 		});
-		
 		layout.getChildren().addAll(shadow, label);
 		layout.setAlignment(Pos.CENTER);
-		
 		buttons.getChildren().addAll(returnToGame, exitGame);
 		buttons.setAlignment(Pos.CENTER);
-		
 		border.setCenter(buttons);
 		border.setTop(layout);
 		border.getStylesheets().add("projectRecruiterPlus/graphicsInterface/CSS/styleExitProgram.css");
-
+		window.initModality(Modality.APPLICATION_MODAL);
+		window.setTitle("Exit App");
+		window.setMinWidth(250);
 		window.setScene(scene);
 		window.showAndWait();
 		

@@ -24,6 +24,14 @@ import projectRecruiterPlus.Entities.User;
 @DiscriminatorValue("Teamlead")
 public class TeamLead extends CompanyRole {
 
+	public final static float defaultPoint = 1.0f;
+	public final static int defaultAcces = 2;
+	public final static String defaultName = "Recruitment Team Leader";
+	public final static String defaultDescription =  "The Team Leader manages an team. "
+			+ "The TeamLead request projects from tha manager. Asigns the projects to the team."
+			+ "Looks at statistics from the team and specific recruiter";
+
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	private TeamOfRecruitment team;
 	
@@ -31,15 +39,13 @@ public class TeamLead extends CompanyRole {
 	private Manager manager;
 	
 	public TeamLead(User user) {
-		super.acessLevel = 2;
-		super.name = "Recruitment Team Leader";
-		super.description = "The Team Leader manages an team. "
-				+ "The TeamLead request projects from tha manager. Asigns the projects to the team."
-				+ "Looks at statistics from the team and specific recruiter";
-		super.points = 1.0f;
+		super.acessLevel = defaultAcces;
+		super.name = defaultName;
+		super.description = defaultDescription;
+		super.points =defaultPoint;
 		super.user = user;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "TeamLead [team=" + team + ", manager=" + manager + ", id=" + id + ", name=" + name + ", points="

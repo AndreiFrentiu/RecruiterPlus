@@ -31,6 +31,7 @@
 		<mapping class="projectRecruiterPlus.Entities.User" />
 		<mapping class="projectRecruiterPlus.Entities.Person" />
 		<mapping class="projectRecruiterPlus.Entities.TeamOfRecruitment" />
+		<mapping class="projectRecruiterPlus.Entities.RecruiterRank" />
 		<mapping class="projectRecruiterPlus.Entities.Project" />
 		<mapping class="projectRecruiterPlus.Entities.Candidate" />
 		<mapping class="projectRecruiterPlus.Entities.Roles.AppAdmin" />

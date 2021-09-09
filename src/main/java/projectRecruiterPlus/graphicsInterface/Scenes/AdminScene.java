@@ -4,6 +4,7 @@ package projectRecruiterPlus.graphicsInterface.Scenes;
 import java.util.List;
 
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -14,10 +15,11 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import projectRecruiterPlus.App;
 import projectRecruiterPlus.Entities.TeamOfRecruitment;
-import projectRecruiterPlus.Util.Interface.Scenes.AdminSceneAbstract;
 import projectRecruiterPlus.Util.Table.TableOfUsers;
+import projectRecruiterPlus.graphicsInterface.Scenes.NewUser.NewUserScene;
+import projectRecruiterPlus.graphicsInterface.Scenes.NewUser.UserValidation;
 
-public class AdminScene extends AdminSceneAbstract {
+public class AdminScene {
 
 	private static TableOfUsers tableOfUsers = new TableOfUsers();
 	
@@ -28,6 +30,8 @@ public class AdminScene extends AdminSceneAbstract {
 		bp.setLeft(addMenu());
 		bp.setTop(addTop());
 		bp.setCenter(addTable());
+		bp.setRight(addSpace());
+		bp.setBottom(addSpace());
 		bp.setStyle("-fx-background-image: url(\"/projectRecruiterPlus/graphicsInterface/CSS/imgs/adminbk.jpg\");"
 				+ " -fx-background-repeat: no-repeat;" + "	-fx-background-size: stretch;");
 		
@@ -36,6 +40,13 @@ public class AdminScene extends AdminSceneAbstract {
 		window.show();
 	}
 	
+	private static HBox addSpace() {
+		HBox space = new HBox(10);
+		final Label shadowRight = new Label("     ");
+		space.getChildren().addAll(shadowRight);
+		return space;
+	}
+
 	private static HBox addMenu() {
 		HBox addMenu = new HBox();
 		VBox menu = new VBox();
@@ -56,6 +67,12 @@ public class AdminScene extends AdminSceneAbstract {
 		Button newTeam = new Button("Create New Team");
 		Button settings = new Button("Settings");
 		Button deleteTeam = new Button("Delete a Team");
+		Button editRanksForRec = new Button("Edit Recruiter Ranks");
+		
+		editRanksForRec.getStyleClass().add("fancy-button");
+		editRanksForRec.setOnAction(e -> {
+
+		});
 		
 		requests.getStyleClass().add("fancy-button");
 		requests.setOnAction(e -> {
@@ -65,6 +82,8 @@ public class AdminScene extends AdminSceneAbstract {
 		addNewUser.getStyleClass().add("fancy-button");
 		addNewUser.setOnAction(e -> {
 			NewUserScene newUserScene = new NewUserScene();
+			UserValidation userValidation = new UserValidation(newUserScene);
+			newUserScene.setUserValidation(userValidation);
 			newUserScene.setScene();
 		});
 
@@ -98,7 +117,7 @@ public class AdminScene extends AdminSceneAbstract {
 		menu.getStylesheets().add("projectRecruiterPlus/graphicsInterface/CSS/styleAdminScene.css");
 		menu.setAlignment(Pos.CENTER);
 		menu.setSpacing(20);
-		menu.getChildren().addAll(options, userManagement, addNewUser, editSelectedUser, archiveUser, teamManagement,
+		menu.getChildren().addAll(options, userManagement, addNewUser, editSelectedUser, editRanksForRec, archiveUser, teamManagement,
 				newTeam, deleteTeam, requestTag, requests, settings);
 
 		addMenu.getStylesheets().add("projectRecruiterPlus/graphicsInterface/CSS/styleAdminScene.css");

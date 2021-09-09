@@ -7,9 +7,9 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import projectRecruiterPlus.Entities.TeamOfRecruitment;
-import projectRecruiterPlus.Util.Interface.Dao.DaoInterfaceTeamOfRecruitment;
+import projectRecruiterPlus.Util.Interface.Dao.DaoInterfaceSupportClass;
 
-public class DaoTeamOfRecruitment implements DaoInterfaceTeamOfRecruitment {
+public class DaoTeamOfRecruitment implements DaoInterfaceSupportClass<TeamOfRecruitment> {
 
 	private Session session;
 	private Transaction transaction;
@@ -53,7 +53,7 @@ public class DaoTeamOfRecruitment implements DaoInterfaceTeamOfRecruitment {
 	}
 
 	@Override
-	public boolean deleteTeamOfRecruitment(TeamOfRecruitment team) {
+	public boolean delete(TeamOfRecruitment team) {
 		Query query = session.createQuery("Delete from TeamOFRecruitment where id = :par1");
 		query.setParameter("par1", team.getId());
 		if(query.executeUpdate()==1) {
@@ -62,6 +62,4 @@ public class DaoTeamOfRecruitment implements DaoInterfaceTeamOfRecruitment {
 			return false;
 		}
 	}
-
-	
 }

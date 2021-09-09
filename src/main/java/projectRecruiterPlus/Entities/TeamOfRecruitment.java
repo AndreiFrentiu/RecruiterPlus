@@ -38,8 +38,7 @@ public class TeamOfRecruitment {
 	
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "team")
 	private TeamLead teamLeader;
-	
-	//TODO custom error 2 TeamLeads
+
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "team")
 	private List<User> members;
 	

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import projectRecruiterPlus.Entities.RecruiterRank;
 import projectRecruiterPlus.Entities.TeamOfRecruitment;
 import projectRecruiterPlus.Entities.User;
 import projectRecruiterPlus.Entities.Roles.AppAdmin;
@@ -33,7 +34,8 @@ public class App extends Application {
 
 		primaryStage.setOnCloseRequest(e -> {
 			e.consume();
-			if (AlertBoxExit.display()) {
+			AlertBoxExit alertBox = new AlertBoxExit();
+			if (alertBox.display()) {
 				primaryStage.close();
 				timeCounter.stopCount();
 			}
@@ -41,8 +43,21 @@ public class App extends Application {
 	}
 
 	private void addinfo() {
-		User user2 = new User("error", "error");
-		user2.setFirstName("Error");
+		
+		RecruiterRank rank1 = new RecruiterRank();
+		rank1.setRankName("rank1");
+		resources.getDaoRecRank().save(rank1);
+		
+		RecruiterRank rank2 = new RecruiterRank();
+		rank2.setRankName("rank2");
+		resources.getDaoRecRank().save(rank2);
+		
+		RecruiterRank rank3 = new RecruiterRank();
+		rank3.setRankName("rank3");
+		resources.getDaoRecRank().save(rank3);
+		
+		User user2 = new User("test", "test");
+		user2.setFirstName("TestUser");
 		try {
 			resources.getDaoUser().save(user2);
 		} catch (Exception e) {
@@ -55,9 +70,8 @@ public class App extends Application {
 		LocalDate thisTime = LocalDate.now();
 		user.setBirthday(thisTime);
 		user.setFirstDayWork(thisTime);
-		CompanyRole cr = new CompanyRole();
-		cr.setName("da");
-		user.setCompanyRole(cr);
+		Recruiter recruiter = new Recruiter(user);
+		user.setCompanyRole(recruiter);
 		user.setContactNumber(52374120);
 		user.setEmail("thebest@yahoo.com");
 		user.setFirstName("Gigel");
@@ -66,19 +80,19 @@ public class App extends Application {
 		user.setLastName("Mitica");
 		user.setNetSalary(120.0);
 		user.setVacationDays(12);
+		
 		TeamOfRecruitment team = new TeamOfRecruitment();
-		resources.getSession().save(team);
 		team.setName("Elite");
+		resources.getSession().save(team);
+		
+		
+		
 		user.setTeam(team);
 		try {
 			resources.getDaoUser().save(user);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		CompanyRole companyrole = new Manager(user);
-		resources.getSession().save(companyrole);
 
 		CompanyRole companyrole2 = new Recruiter(user2);
 		resources.getSession().save(companyrole2);
@@ -87,7 +101,6 @@ public class App extends Application {
 		try {
 			resources.getDaoUser().save(user3);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
